@@ -1,6 +1,7 @@
+
 ![Alt text](../public/index.png)
 
-# **A Glimpse Into The Future Of Trade**
+# A Glimpse Into The Future Of Trade
 
 Hi 👋 hope your doing well.
    

@@ -28,9 +28,10 @@ async function handler(req: Request): Promise<Response> {
   const meta = {}
 
   content.children.slice(0,3).forEach(element => {
-     
-    if(element.name === "img"){
-      meta[element.name] = element.attributes.src
+      
+    if(element.name === "p" && element.children[0]?.name === 'img'){
+      const img_node = element.children[0]
+      meta[img_node?.name] = img_node.attributes.src
     }else{
       meta[element.name] = element.children[0]
     }
@@ -38,12 +39,14 @@ async function handler(req: Request): Promise<Response> {
 
   })
 
+  console.log(meta)
   const html = Markdoc.renderers.html(content);
 
   return new Response(container
     .replace('{{ CONTENT }}', html)
     .replaceAll('{{TITLE}}',meta['h1'])
-    .replaceAll('{{DESC}}',meta['p']), {
+    .replaceAll('{{DESC}}',meta['p'])
+    .replaceAll('{{IMG}}',meta['img']), {
     headers:{
       "content-type": "text/html",
     }
