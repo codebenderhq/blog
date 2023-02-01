@@ -1,4 +1,4 @@
-import Markdoc from 'npm:@markdoc/markdoc'
+import Markdoc from 'https://esm.sh/@markdoc/markdoc'
 import { serve } from "https://deno.land/std/http/server.ts";
 
 async function handler(req: Request): Promise<Response> {
