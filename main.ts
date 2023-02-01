@@ -1,9 +1,18 @@
 import Markdoc from 'https://esm.sh/@markdoc/markdoc'
 import { serve } from "https://deno.land/std/http/server.ts";
+import { serveFile } from "https://deno.land/std/http/file_server.ts";
 
 async function handler(req: Request): Promise<Response> {
 
   const {pathname} = new URL(req.url)
+  console.log(pathname)
+
+  if(pathname.includes('/public/')){
+      
+    console.log('serve file')
+    return await serveFile(req, `.${pathname}`);
+  }
+
   const container = await Deno.readTextFile('./index.html')
   
   let source; 
@@ -18,10 +27,14 @@ async function handler(req: Request): Promise<Response> {
   const content = Markdoc.transform(ast, /* config */);
   const meta = {}
 
-  content.children.slice(0,2).forEach(element => {
-    
-    console.log(element)
-    meta[element.name] = element.children[0]
+  content.children.slice(0,3).forEach(element => {
+     
+    if(element.name === "img"){
+      meta[element.name] = element.attributes.src
+    }else{
+      meta[element.name] = element.children[0]
+    }
+  
 
   })
 
@@ -29,8 +42,8 @@ async function handler(req: Request): Promise<Response> {
 
   return new Response(container
     .replace('{{ CONTENT }}', html)
-    .replace('{{TITLE}}',meta['h1'])
-    .replace('{{DESC}}',meta['p']), {
+    .replaceAll('{{TITLE}}',meta['h1'])
+    .replaceAll('{{DESC}}',meta['p']), {
     headers:{
       "content-type": "text/html",
     }

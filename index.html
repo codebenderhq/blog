@@ -3,10 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="Sauveur: {{TITLE}}">
+    <meta property="og:description" content="{{DESC}}">
+    <meta property="og:image" content="{{IMG}}">
+    <meta property="og:url" content="https://sauveur.xyz">
+
+    <meta name="twitter:title" content="Sauveur: {{TITLE}}">
+    <meta name="twitter:description" content="{{DESC}}">
+    <meta name="twitter:image" content="../assets/background.png">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="description" content="{{DESC}}" />
     <title>Sauveur: {{TITLE}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    {{ CONTENT }}
+    <div class="w-screen h-full overflow-hidden p-2">
+      {{ CONTENT }}
+    </div>
+
   </body>
 </html>
