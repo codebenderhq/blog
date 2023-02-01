@@ -39,7 +39,7 @@ async function handler(req: Request): Promise<Response> {
 
   })
 
-  console.log(meta)
+  // console.log(meta)
   const html = Markdoc.renderers.html(content);
 
   return new Response(container
