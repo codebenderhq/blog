@@ -15,11 +15,29 @@
     <meta name="description" content="{{DESC}}" />
     <title>Sauveur: {{TITLE}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        h1 {
+          @apply text-3xl md:text-6xl p-2
+        }
+
+        p {
+          @apply p-2
+        }
+
+        a {
+          @apply text-blue-600
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="w-screen h-full overflow-hidden p-2 space-y-2">
+    <div class="w-screen h-full overflow-hidden">
       {{ CONTENT }}
     </div>
 
+    <div class="p-2 w-full h-12">
+      <a href="/">Sauveur</a>
+    </div>
   </body>
 </html>
